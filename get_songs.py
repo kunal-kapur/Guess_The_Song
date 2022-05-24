@@ -13,6 +13,12 @@ secret = lines[1]
 client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
 sp = spotipy.Spotify(client_credentials_manager = client_credentials_manager)
 
+songs = []
 top_50 = sp.playlist("37i9dQZEVXbLRQDuF5jeBp")['tracks']['items']
-print(top_50[0]['track'].keys())
 
+for song in top_50:
+    name = song['track']['name']
+    title = song['track']['artists'][0]['name']
+    songs.append((name,title))
+
+print(len(songs))
