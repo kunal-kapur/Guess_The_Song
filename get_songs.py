@@ -1,7 +1,18 @@
-from bs4 import BeautifulSoup
 import requests
+import spotipy
+from spotipy import Spotify
+from spotipy.oauth2 import SpotifyClientCredentials
 
-page = requests.get("https://dataquestio.github.io/web-scraping-pages/simple.html")
-soup = BeautifulSoup(html_doc, 'html.parser')
+file = open(".gitignore")
+lines = file.readlines()
+for i in list(lines):
+    lines.pop(0)
+    lines.append(i[0:len(i)-1])
+cid = lines[0]
+secret = lines[1]
+client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
+sp = spotipy.Spotify(client_credentials_manager = client_credentials_manager)
 
-print(soup.prettify())
+top_50 = sp.playlist("37i9dQZEVXbLRQDuF5jeBp")['tracks']['items']
+print(top_50[0]['track'].keys())
+
