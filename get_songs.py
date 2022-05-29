@@ -2,6 +2,7 @@ import requests
 import spotipy
 from spotipy import Spotify
 from spotipy.oauth2 import SpotifyClientCredentials
+from Find_lyrics import extract_lyrics
 
 file = open(".gitignore")
 lines = file.readlines()
@@ -12,13 +13,15 @@ cid = lines[0]
 secret = lines[1]
 client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
 sp = spotipy.Spotify(client_credentials_manager = client_credentials_manager)
-
-songs = []
+songs = {}
 top_50 = sp.playlist("37i9dQZEVXbLRQDuF5jeBp")['tracks']['items']
 
-for song in top_50:
-    name = song['track']['name']
-    title = song['track']['artists'][0]['name']
-    songs.append((name,title))
+for song_info in top_50:
+    artist = song_info['track']['artists'][0]['name']
+    name = song_info['track']['name']
+    print(artist,name)
+    songs[(artist,name)] = extract_lyrics(artist, name)
 
-print(len(songs))
+print(songs)
+
+
