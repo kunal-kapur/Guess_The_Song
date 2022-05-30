@@ -23,7 +23,7 @@ def scrape_lyrics(artistname, songname):
     artistname2 = str(artistname.replace(' ','-')) if ' ' in artistname else str(artistname)
     songname2 = str(songname.replace(' ','-')) if ' ' in songname else str(songname)
     url = 'https://genius.com/'+ artistname2 + '-' + songname2 + '-' + 'lyrics'
-    print("url", url)
+    #print("url", url)
     page = requests.get(url)
     html = BeautifulSoup(page.text, 'html.parser')
     lyrics1 = html.find("div", class_="lyrics")
@@ -36,32 +36,58 @@ def scrape_lyrics(artistname, songname):
         lyrics = None
     return lyrics
 
+
 def clean_lyrics(lyrics):
-    new_lyrics = ""
-    punc = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+    new_lyrics = []
+    curr_verse = ""
+    punc = '''!()[]{};:\,<>./?@#$%^&*_~'''
+
+    def clean_string(verse):
+        spaces_and_quotes = ['''"''',"'"]
+        verse = verse.strip()
+        new_verse = ""
+        for i in verse:
+            if i not in spaces_and_quotes:
+                new_verse += i
+        return new_verse.strip()
+
+
     exlcuding = False
-    print(lyrics)
+    #print(lyrics)
     for i in range(len(lyrics)):
         if (lyrics[i] == "["):
             exclusion = True
+            curr_verse = clean_string(curr_verse)
+            if (len(curr_verse.strip()) != 0):
+                new_lyrics.append(clean_string(curr_verse))
+            curr_verse = ""
             continue
         elif (lyrics[i] == "]"):
-            exclusion  = False
-            new_lyrics += " "
+            exclusion = False
             continue
 
-        if (lyrics[i] not in punc and not exclusion):
-            new_lyrics += (lyrics[i])
+        if (lyrics[i] in punc):
+            new_lyrics.append(curr_verse)
+            curr_verse = ""
+        elif (not exclusion):
+
+            curr_verse += (lyrics[i])
             if (i != len(lyrics) - 1):
                 if (lyrics[i+1].isupper()):
-                    new_lyrics += " "
+                    curr_verse = clean_string(curr_verse)
+                    if (len(curr_verse.strip()) != 0):
+                        new_lyrics.append(curr_verse)
+                        curr_verse = ""
 
     return new_lyrics
 
 
 def get_lyrics(artist, song):
     scraped_lyrics = scrape_lyrics(artist, song)
-    cleaned_lyrics = clean_lyrics(scraped_lyrics)
-    print(cleaned_lyrics)
+    #TODO
+    #Songs in difference languages
+    if (scraped_lyrics):
+        cleaned_lyrics = clean_lyrics(scraped_lyrics)
+        return cleaned_lyrics
+    return
 
-get_lyrics("Harry Styles", "As it was")
