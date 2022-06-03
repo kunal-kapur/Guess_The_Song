@@ -27,9 +27,3 @@ def update_songs():
 
     return songs
 
-top_50_songs = update_songs()
-print(top_50_songs)
-
-
-
-

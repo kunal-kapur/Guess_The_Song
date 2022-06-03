@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="../static/main.css">
+</head>
+
+<body>
+
+    <h1>Enter the Artist and song</h1>
+
+    <ul>
+        {% for item in lyric_list %}
+        <li>{{item}}</li>
+        {% endfor %}
+
+    </ul>
+
+</body>
+
+</html>

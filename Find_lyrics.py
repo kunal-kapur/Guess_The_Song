@@ -4,7 +4,6 @@ import requests
 
 import re
 
-website_string = "https://www.azlyrics.com/lyrics/"
 
 def find_lyric_page(artist, song):
     artist = artist.lower().replace(" ", "")
