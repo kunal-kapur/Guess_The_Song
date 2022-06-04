@@ -4,6 +4,7 @@ from spotipy import Spotify
 from spotipy.oauth2 import SpotifyClientCredentials
 from Find_lyrics import get_lyrics
 
+
 def update_songs():
     file = open(".gitignore")
     lines = file.readlines()
@@ -25,5 +26,12 @@ def update_songs():
         if recieved_lyrics:
             songs[(artist,name)] = get_lyrics(artist, name)
 
-    return songs
+    return song_info
+
+
+
+
+    
+
+
 
