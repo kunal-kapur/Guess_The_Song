@@ -11,20 +11,21 @@
 
     <h1>Enter the Artist and song</h1>
 
+
     <form>
         <label> Artist name </label>
-        <input type="text"> <br>
+        <input type="text" name="artist_name"> <br>
         <label>Song Name</label>
-        <input type="text">
+        <input type="text" name="song_name">
+
+        <input type="button" value="Enter" />
+        <input type="button" value="More" />
 
     </form>
-
-
     <ul>
         {% for item in lyric_list %}
         <li> {{item}} </li>
         {% endfor %}
-
     </ul>
 
 
