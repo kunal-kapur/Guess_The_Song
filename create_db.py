@@ -1,13 +1,17 @@
-from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///song_info.db'
+db = SQLAlchemy(app)
 
-engine = create_engine('sqlite:///college.db', echo = True)
-meta = MetaData()
+db.create_all()
 
-students = Table(
-   'students', meta, 
-   Column('id', Integer, primary_key = True), 
-   Column('name', String), 
-   Column('lastname', String),
-)
-meta.create_all(engine)
+print("refreshed")
+class Song_Info(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    artist = db.Column(db.String(100), nullable = False)
+    title = db.Column(db.String(100), nullable = False)
+    
+    lyrics = db.Column(db.Text(),nullable = False)
+

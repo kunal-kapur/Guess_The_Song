@@ -37,7 +37,8 @@ def scrape_lyrics(artistname, songname):
 
 
 def clean_lyrics(lyrics):
-    new_lyrics = ""
+    new_lyrics = []
+    curr_verse = ""
     punc = '''!()[]{};:\,<>./?@#$%^&*_~'''
 
     def clean_string(verse):
@@ -55,18 +56,27 @@ def clean_lyrics(lyrics):
     for i in range(len(lyrics)):
         if (lyrics[i] == "["):
             exclusion = True
-            continue
-
+            curr_verse = clean_string(curr_verse)
+            if (len(curr_verse.strip()) != 0):
+                new_lyrics.append(clean_string(curr_verse))
+            curr_verse = ""
             continue
         elif (lyrics[i] == "]"):
-            #new_lyrics += " "
             exclusion = False
             continue
-            
+
+        if (lyrics[i] in punc):
+            new_lyrics.append(curr_verse)
+            curr_verse = ""
         elif (not exclusion):
-            if ((lyrics[i].isupper())):
-                new_lyrics += " "
-            new_lyrics += lyrics[i]
+
+            curr_verse += (lyrics[i])
+            if (i != len(lyrics) - 1):
+                if (lyrics[i+1].isupper()):
+                    curr_verse = clean_string(curr_verse)
+                    if (len(curr_verse.strip()) != 0):
+                        new_lyrics.append(curr_verse)
+                        curr_verse = ""
 
     return new_lyrics
 
@@ -75,9 +85,9 @@ def get_lyrics(artist, song):
     scraped_lyrics = scrape_lyrics(artist, song)
     #TODO
     #Songs in difference languages
-    print(scraped_lyrics)
     if (scraped_lyrics):
         cleaned_lyrics = clean_lyrics(scraped_lyrics)
         return cleaned_lyrics
     return
-print(get_lyrics("Harry Styles", "As it was"))
+
+#print(get_lyrics("Harry Styles", "As it was"))

@@ -17,18 +17,17 @@ def update_songs():
     sp = spotipy.Spotify(client_credentials_manager = client_credentials_manager)
     songs = {}
     top_50 = sp.playlist("37i9dQZEVXbLRQDuF5jeBp")['tracks']['items']
-
+    count = 1
     for song_info in top_50:
         artist = song_info['track']['artists'][0]['name']
         name = song_info['track']['name']
-        print(artist,name)
+        print(count,artist,name)
+        count += 1
         recieved_lyrics = get_lyrics(artist, name)
         if recieved_lyrics:
             songs[(artist,name)] = get_lyrics(artist, name)
 
-    return song_info
-
-
+    return songs
 
 
     
