@@ -90,4 +90,4 @@ def get_lyrics(artist, song):
         return cleaned_lyrics
     return
 
-#print(get_lyrics("Harry Styles", "As it was"))
+#print(scrape_lyrics("Harry Styles", "As it was"))

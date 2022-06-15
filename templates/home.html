@@ -17,11 +17,15 @@
         <input type="text" name="artist_name"> <br>
         <label>Song Name</label>
         <input type="text" name="song_name">
-
-        <input type="button" value="Enter" />
-        <input type="button" value="More" />
-
+        <br>
     </form>
+
+    <form method="GET" action="/">
+        <input type="button" value="Enter" name="enter" />
+        <input type="button" value="More" name="more_lyrics" />
+    </form>
+
+
     <ul>
         {% for item in lyric_list %}
         <li> {{item}} </li>
