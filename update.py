@@ -40,6 +40,7 @@ def update_songs():
 
     return songs
 
+update_songs()
 
 
 
