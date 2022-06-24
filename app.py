@@ -32,9 +32,6 @@ def index():
     song_artist = song[0]
     song_name = song[1]
     song_lyrics = song[2]
-    print(song_artist)
-    print(song_name)
-    print(song_lyrics)
     data = {'song_artist': song_artist, 'song_name': song_name, 'song_lyrics': song_lyrics}
     return render_template('home.html', data=data)
 

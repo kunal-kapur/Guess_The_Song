@@ -10,13 +10,44 @@
 
 <body>
 
+    <img id="spotify-image" src="../static/Spotify_Logo_RGB_Green.png">
+
+    <div class="container">
+
+        <h1>Spotify: Guess the Song and Artist</h1>
+
+        <div class="input-fields">
+            <div class="text-input">
+                <label for="artist">Artist Name</label>
+                <input type="text" name="artist">
+            </div>
+            <div class="text-input">
+                <label for="song">Song Name</label>
+                <input type="text" name="song">
+            </div>
+
+        </div>
+
+        <div class="button-field">
+            <button id="check">Check</button>
+            <button id="more">More</button>
+        </div>
+
+        <div id="lyric-field">
+
+        </div>
+
+    </div>
+
 </body>
 
 
 <script type="text/javascript">
+    console.log('{{data}}')
     info = JSON.parse('{{data|tojson}}');
+    console.log(info);
 </script>
-<script src="static/script.js"></script>
+<script src="../static/script.js"></script>
 
 
 </html>
