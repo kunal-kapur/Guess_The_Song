@@ -3,6 +3,7 @@ from flask import Flask, render_template, request
 import random
 from Song_Info import db, Song_Info
 from Find_lyrics import clean_lyrics
+from multiprocessing import Value
 
 
 
@@ -21,25 +22,21 @@ def get_random_song():
 
 #get_random_song()
 
-counter = 1
-new_song = get_random_song()
+new_song = get_random_song()[2]
 
+counter = Value('i', 0)
 
-
+song = get_random_song()
 @app.route('/', methods = ["GET", "POST"])
 def index():
-    
-    if (request.method == "GET"):
-        print(request.args)
-        print("HERE")
-        print(len(request.form))
-        # if (request.form['more_lyrics'] == 'more'):
-        #     counter += 1
-        #     return render_template("home.html",lyric_list = new_song[2][0:counter])
-           
-    return render_template("home.html",lyric_list = new_song[2][0:counter])
-
-    #return render_template("home.html",lyric_list = new_song[2])
+    song_artist = song[0]
+    song_name = song[1]
+    song_lyrics = song[2]
+    print(song_artist)
+    print(song_name)
+    print(song_lyrics)
+    data = {'song_artist': song_artist, 'song_name': song_name, 'song_lyrics': song_lyrics}
+    return render_template('home.html', data=data)
 
 if __name__ == '__main__':
     app.run(host='localhost', port=3000, debug=True)
