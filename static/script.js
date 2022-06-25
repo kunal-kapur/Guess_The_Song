@@ -91,9 +91,18 @@ checkButton.addEventListener("click", function () {
 
         reset = document.createElement("button");
         reset.textContent = "Reset";
-
         buttonField.appendChild(reset);
 
+        sleep(8000);
+
+
+        reset.addEventListener("click", document.location.reload(true));
+
     }
-})
+});
+
+function sleep(delay) {
+    var start = new Date().getTime();
+    while (new Date().getTime() < start + delay);
+}
 

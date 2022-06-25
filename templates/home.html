@@ -48,9 +48,13 @@
 
 
 <script type="text/javascript">
-    console.log('{{data}}')
-    info = JSON.parse('{{data|tojson}}');
-    console.log(info);
+    try {
+        info = JSON.parse('{{data|tojson}}');
+        console.log(info);
+    }
+    catch {
+        document.location.reload(true);
+    }
 </script>
 <script src="../static/script.js"></script>
 
