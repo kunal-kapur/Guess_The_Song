@@ -34,14 +34,19 @@ moreButton.addEventListener("click", function () {
 
 })
 
+let numWrong = 0;
+
 checkButton.addEventListener("click", function () {
     bothCorrect = true
-    if (songInput != correctSongName) {
-        //bothCorrect = false;
+    console.log(songInput.value);
+    if (songInput.value.toLowerCase() != correctSongName.toLowerCase()) {
+        bothCorrect = false;
     }
 
-    if (artistInput != correctArtist) {
-        //bothCorrect = false;
+    if (artistInput.value.toLowerCase() != correctArtist.toLowerCase()) {
+        bothCorrect = false;
+
+
     }
 
     if (bothCorrect == true) {
@@ -49,8 +54,46 @@ checkButton.addEventListener("click", function () {
         correct.style.color = 'green'
         correct.style.fontSize = '40px';
         correct.textContent = "CORRECT"
-        console.log(document.querySelector(".container h1"));
-        document.querySelector(".container .input-fields").insertBefore(correct, document.querySelectorAll(".container .input-fields" +
-            " .text-input")[1]);
+
+        document.querySelector(".container .input-fields .correct-incorrect").classList.remove("incorrect");
+        document.querySelector(".container .input-fields .correct-incorrect").textContent = "CORRECT";
+        document.querySelector(".container .input-fields .correct-incorrect").classList.add("correct");
+    }
+    else {
+        if (numWrong < 3) {
+            document.querySelector(".container .input-fields .correct-incorrect").textContent += " X"
+
+            document.querySelector(".container .input-fields .correct-incorrect").classList.add("incorrect");
+            numWrong += 1;
+        }
+    }
+
+    if (numWrong == 3) {
+        document.getElementById("lyric-field").style.display = "none";
+
+        answer1 = document.createElement("div")
+        answer1.classList = "answer";
+
+        answer2 = document.createElement("div");
+        answer2.classList = "answer"
+
+        answer1.textContent = correctArtist;
+        answer2.textContent = correctSongName;
+
+        document.querySelector(".container").appendChild(answer1);
+        document.querySelector(".container").appendChild(answer2);
+
+        buttonField = document.querySelector(".container .button-field")
+
+        while (buttonField.firstChild) {
+            buttonField.removeChild(buttonField.firstChild);
+        }
+
+        reset = document.createElement("button");
+        reset.textContent = "Reset";
+
+        buttonField.appendChild(reset);
+
     }
 })
+

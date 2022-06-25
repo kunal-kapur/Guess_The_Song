@@ -49,11 +49,27 @@ h1 {
     align-items: center;
 }
 
+.container .input-fields .correct-incorrect.correct {
+    color: lime;
+    align-self: center;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.container .input-fields .correct-incorrect.incorrect {
+    color: red;
+    align-self: center;
+    font-size: 50px;
+    letter-spacing: 20px;
+    font-weight: 900;
+}
+
 .container .input-fields .text-input input {
     width: 80%;
     height: 30%;
-    font-size: 100%;
+    font-size: 20px;
     text-align: center;
+    border-radius: 15px;
 }
 
 .container .button-field {
@@ -67,9 +83,20 @@ h1 {
     width: 30%;
     height: 100%;
     font-weight: 800;
+    border-radius: 10px;
+}
+
+.container .button-field button:hover {
+    background-color: lime;
+    transition: ease 0.5s;
 }
 
 .container #lyric-field {
     align-self: center;
     font-family: 'Roboto', sans-serif;
+}
+
+.container .answer {
+    margin-top: 5%;
+    font-size: 40px;
 }

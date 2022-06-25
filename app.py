@@ -4,16 +4,16 @@ import random
 from Song_Info import db, Song_Info
 from Find_lyrics import clean_lyrics
 from multiprocessing import Value
+import random
+from sqlalchemy.sql import func
+from Song_Info import app
 
-
-
-app = Flask(__name__)
 
 #current_top_50_info = update_songs()
 
 def get_random_song():
-
-    given = Song_Info.query.filter_by(artist='Harry Styles').first()
+    random.seed = 4
+    given = Song_Info.query.order_by(func.random()).first()
     artist = given.artist
     song_name=  given.title
     lyrics = clean_lyrics(given.lyrics)
@@ -29,6 +29,8 @@ counter = Value('i', 0)
 song = get_random_song()
 @app.route('/', methods = ["GET", "POST"])
 def index():
+    song = get_random_song()
+    song = get_random_song()
     song_artist = song[0]
     song_name = song[1]
     song_lyrics = song[2]
