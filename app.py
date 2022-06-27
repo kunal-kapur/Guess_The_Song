@@ -1,3 +1,4 @@
+from turtle import update
 from flask import Flask, render_template, request
 #from Get_songs import update_songs
 import random
@@ -8,8 +9,15 @@ import random
 from sqlalchemy.sql import func
 from Song_Info import app
 
+from update import update_songs
+from apscheduler.schedulers.background import BackgroundScheduler
+
 
 #current_top_50_info = update_songs()
+
+sched = BackgroundScheduler(daemon=True)
+sched.add_job(update_songs,'interval',minutes=1440)
+sched.start()
 
 def get_random_song():
     random.seed = 4

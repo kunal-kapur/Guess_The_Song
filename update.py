@@ -5,6 +5,8 @@ from spotipy.oauth2 import SpotifyClientCredentials
 from Find_lyrics import get_lyrics, scrape_lyrics
 from Song_Info import Song_Info, db
 from flask import Flask
+from sqlalchemy import create_engine
+
 
 
 app = Flask(__name__)
@@ -42,8 +44,6 @@ def update_songs():
     return songs
 
 update_songs()
-
-
 
 
 

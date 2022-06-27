@@ -56,17 +56,20 @@ let numWrong = 0;
 checkButton.addEventListener("click", function () {
     bothCorrect = true
     console.log(songInput.value);
-    if (songInput.value.toLowerCase() != correctSongName.toLowerCase()) {
+    if (songInput.value.trim().toLowerCase() != correctSongName.toLowerCase()) {
         bothCorrect = false;
     }
 
-    if (artistInput.value.toLowerCase() != correctArtist.toLowerCase()) {
+    if (artistInput.value.trim().toLowerCase() != correctArtist.toLowerCase()) {
         bothCorrect = false;
 
 
     }
 
     if (bothCorrect == true) {
+
+        cleanUp();
+
         let correct = document.createElement("div");
         correct.style.color = 'green';
         correct.style.fontSize = '40px';
@@ -86,36 +89,40 @@ checkButton.addEventListener("click", function () {
     }
 
     if (numWrong == 3) {
-        document.getElementById("lyric-field").style.display = "none";
-
-        answer1 = document.createElement("div")
-        answer1.classList = "answer";
-
-        answer2 = document.createElement("div");
-        answer2.classList = "answer"
-
-        answer1.textContent = correctArtist;
-        answer2.textContent = correctSongName;
-
-        document.querySelector(".container").appendChild(answer1);
-        document.querySelector(".container").appendChild(answer2);
-
-        buttonField = document.querySelector(".container .button-field")
-
-        while (buttonField.firstChild) {
-            buttonField.removeChild(buttonField.firstChild);
-        }
-
-        reset = document.createElement("button");
-        reset.textContent = "Reset";
-        buttonField.appendChild(reset);
-
-
-        reset.addEventListener('click', function () { document.location.reload(true) }
-        );
-
+        cleanUp();
     }
 });
+
+function cleanUp() {
+    document.getElementById("lyric-field").style.display = "none";
+
+    answer1 = document.createElement("div")
+    answer1.classList = "answer";
+
+    answer2 = document.createElement("div");
+    answer2.classList = "answer"
+
+    answer1.textContent = correctArtist;
+    answer2.textContent = correctSongName;
+
+    document.querySelector(".container").appendChild(answer1);
+    document.querySelector(".container").appendChild(answer2);
+
+    buttonField = document.querySelector(".container .button-field")
+
+    while (buttonField.firstChild) {
+        buttonField.removeChild(buttonField.firstChild);
+    }
+
+    reset = document.createElement("button");
+    reset.textContent = "Reset";
+    buttonField.appendChild(reset);
+
+
+    reset.addEventListener('click', function () { document.location.reload(true) }
+    );
+
+}
 
 function sleep(delay) {
     var start = new Date().getTime();
