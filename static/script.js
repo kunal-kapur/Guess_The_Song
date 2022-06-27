@@ -18,21 +18,38 @@ const songInput = document.getElementById("song-input");
 
 const artistInput = document.getElementById("artist-input");
 
+let reachedEnd = false;
+
+addLyrics();
+
 moreButton.addEventListener("click", function () {
-    if (count == (lyric_list).length) {
+    if (count >= (lyric_list).length && !reachedEnd) {
         let givenLyric = document.createElement("div");
         givenLyric.textContent = "END OF LYRICS";
         lyricField.appendChild(givenLyric);
+        reachedEnd = true;
 
     }
     else {
+
+        addLyrics();
+
+    }
+
+})
+
+function addLyrics() {
+    for (let j = 0; j < 10; j++) {
+        if (count >= lyric_list.length) {
+            break;
+        }
+
         let givenLyric = document.createElement("p");
         givenLyric.textContent = lyric_list[count];
         lyricField.appendChild(givenLyric);
+        count += 1;
     }
-    count += 1;
-
-})
+}
 
 let numWrong = 0;
 
@@ -50,10 +67,10 @@ checkButton.addEventListener("click", function () {
     }
 
     if (bothCorrect == true) {
-        let correct = document.createElement("div")
-        correct.style.color = 'green'
+        let correct = document.createElement("div");
+        correct.style.color = 'green';
         correct.style.fontSize = '40px';
-        correct.textContent = "CORRECT"
+        correct.textContent = "CORRECT";
 
         document.querySelector(".container .input-fields .correct-incorrect").classList.remove("incorrect");
         document.querySelector(".container .input-fields .correct-incorrect").textContent = "CORRECT";
@@ -93,10 +110,9 @@ checkButton.addEventListener("click", function () {
         reset.textContent = "Reset";
         buttonField.appendChild(reset);
 
-        sleep(8000);
 
-
-        reset.addEventListener("click", document.location.reload(true));
+        reset.addEventListener('click', function () { document.location.reload(true) }
+        );
 
     }
 });

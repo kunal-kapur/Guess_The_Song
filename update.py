@@ -10,6 +10,7 @@ from flask import Flask
 app = Flask(__name__)
 
 def update_songs():
+    Song_Info.query.delete()
     file = open(".gitignore")
     lines = file.readlines()
     for i in list(lines):
