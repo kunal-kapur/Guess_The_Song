@@ -1,4 +1,4 @@
-# Guess_The_Lyric
+# Guess The Song
 
 The following project takes the information of the top 50 songs in Spotify and finds the lyrics of them.
 These lyrics are incrementally given to a user and they are asked to guess the song based on the given lyric.
