@@ -1,0 +1,11 @@
+Python>=3.7
+BeautifulSoup>=4.9.0
+requests
+re
+Flask
+flask_sqlalchemy>=2.5.0
+turtle
+multiprocessing
+apscheduler>=3.9.0
+spotipy
+sqlalchemy
